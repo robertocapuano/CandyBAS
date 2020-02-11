@@ -1,18 +1,17 @@
 1 SCREEN1,0:COLOR 10,9,9:CLS:KEY OFF:DEFINT A-Z:C=1:R=0:BA%=6283:CH=0:Z=RND(-TIME)
-40 ch=0:FOR I=0 TO 4: II%=BA%+I*2: m=vpeek(II%): if m=32 then vpoke II%, RND(1)*4+1: ch=1: next:else next
-50 FOR J=4TO1step-1:FOR I=0TO4:II%=BA%+I*2+J*2*32:m=vpeek(II%):if m=32 thenvpoke II%,vpeek(II%-64):vpoke II%-64,32:ch=1
-51 next i:next J: if ch=1 then 40
-55 FORJ=0TO4:FOR I=0TO2:II%=BA%+I*2+J*2*32:T=vpeek(II%):if T=VPEEK(II%+2)and T=VPEEK(II%+4)then vpoke II%,32:vpoke II%+2,32: vpoke II%+4,32::ch=1
-56 next i:next J
-57 FOR J=0TO4:FOR I=0TO2:II%=BA%+J*2+I*2*32:T=vpeek(II%):if T=VPEEK(II%+64)and T=VPEEK(II%+128)then vpoke II%,32:vpoke II%+64,32:vpoke II%+128,32:ch=1
-58 next i:next J: if ch=1 then 40
-60 II%=BA%+C+R*32: vpoke II%,42:KR$=INKEY$:IF KR$="" THEN 60 : else  vpoke II%, 32:
-130 if KR$=CHR$(28) then if C>=7 then C=1-R MOD 2: else C=C+2
-135 if KR$=CHR$(29) then if C<=1 then C=7+R MOD 2: else C=C-2 
-150 if KR$=CHR$(31) then if R=8 then R=0 : else C=C + R MOD 2 -  C MOD 2 :R=R+1: if C=9 then C=7
-155 if KR$=CHR$(30) then if R=0 then R=8 : else C=C + R MOD 2 -  C MOD 2 : R=R-1: if C=9 then C=7
-160 rem IF R<0 then R=10:else if C<0 then C=10: else if C>10 then C=2: else if R>9 then R=1
-170 if KR$<>" " then 60 else if (Rmod2)=1 then IJ%=II%-32:IK%=II%+32: else  IJ%=II%-1:IK%=II%+1:
+40 ch=0:FOR I=0TO4:II%=BA%+I*2:m=vpeek(II%):if m=32 then vpokeII%,RND(1)*4+1:ch=1:next:elsenext
+50 FOR J=4TO1step-1:FOR I=0TO4:II%=BA%+I*2+J*2*32:m=vpeek(II%):ifm=32thenvpokeII%,vpeek(II%-64):vpokeII%-64,32:ch=1
+51 next i,J: if ch=1 then 40
+55 FORJ=0TO4:FOR I=0TO2:II%=BA%+I*2+J*2*32:T=vpeek(II%):ifT=VPEEK(II%+2)andT=VPEEK(II%+4)thenvpokeII%,32:vpokeII%+2,32:vpokeII%+4,32::ch=1
+56 next i,J
+57 FOR J=0TO4:FOR I=0TO2:II%=BA%+J*2+I*2*32:T=vpeek(II%):if T=VPEEK(II%+64)andT=VPEEK(II%+128)then vpoke II%,32:vpoke II%+64,32:vpoke II%+128,32:ch=1
+58 next i,J:if ch=1 then 40 else T=VPEEK(IJ%):VPOKE IJ%,VPEEK(IK%):VPOKE IK%,T:
+60 II%=BA%+C+R*32: IJ%=II%:IK%=II%:vpoke II%,42:KR$=INKEY$:IF KR$="" THEN 60 : else  vpoke II%, 32:
+130 if KR$=CHR$(28) then if C>=7 then C=1-R MOD 2:else C=C+2
+135 if KR$=CHR$(29) then if C<=1 then C=7+R MOD 2:else C=C-2 
+150 if KR$=CHR$(31) then if R=8 then R=0: else C=C+R MOD 2-C MOD 2:R=R+1:if C=9 then C=7
+155 if KR$=CHR$(30) then if R=0 then R=8: else C=C+R MOD 2-C MOD 2:R=R-1:if C=9 then C=7
+170 if KR$<>" " then60 else if(Rmod2)=1 then IJ%=II%-32:IK%=II%+32:else IJ%=II%-1:IK%=II%+1:
 180 T=VPEEK(IJ%):VPOKE IJ%,VPEEK(IK%):VPOKE IK%,T: goto 40
 
 
