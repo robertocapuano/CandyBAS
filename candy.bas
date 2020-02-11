@@ -7,8 +7,8 @@
 110 KR$=INKEY$:IF KR$="" THEN 110 : else  vpoke II%, 32:
 130 if KR$=CHR$(28) then if C%>=7 then c%=1-R% MOD 2: else C%=C%+2
 135 if KR$=CHR$(29) then if C%<=1 then c%=7+R% MOD 2: else C%=C%-2 
-150 if KR$=CHR$(31) then if R%=8 then R%=0 : else C%=C% + R% MOD 2 -  C% MOD 2 :R%=R%+1: 
-155 if KR$=CHR$(30) then if R%=0 then R%=8 : else C%=C% + R% MOD 2 -  C% MOD 2 : R%=R%-1
+150 if KR$=CHR$(31) then if R%=8 then R%=0 : else C%=C% + R% MOD 2 -  C% MOD 2 :R%=R%+1: if C%=9 then C%=7
+155 if KR$=CHR$(30) then if R%=0 then R%=8 : else C%=C% + R% MOD 2 -  C% MOD 2 : R%=R%-1: if C%=9 then C%=7
 160 rem IF R%<0 then R%=10:else if C%<0 then C%=10: else if C%>10 then C%=2: else if R%>9 then R%=1
 170 if KR$<>" " then 300 else if (R%mod2)=1 then IJ%=II%-32:IK%=II%+32: else  IJ%=II%-1:IK%=II%+1:
 180 IF IJ%<>IK% then T=VPEEK(IJ%):VPOKE IJ%,VPEEK(IK%):VPOKE IK%,T
