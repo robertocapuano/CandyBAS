@@ -22,6 +22,10 @@
 
 ----
 
+print chr$(27)+"p";"Inverted Text"
+
+if peek(&HFBEB)and2 then else ?"CTRL pressed"
+
 
 170 if KR$=" " then  CH=1: II%=2+1+BA%+C%*2+R%*2*32;S0=vpeek(  BA%+I*2+2  I1%=R1%*5+C1%:I0%=R0%*5+C0%:SWAP M%(I0%),M%(I1%): CH=1
 190 if ch=0 then 300
