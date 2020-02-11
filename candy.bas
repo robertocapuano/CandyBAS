@@ -13,7 +13,7 @@
 
 250 FOR J=0 TO 4:FOR I=0TO 2: II%=2+BA%+I*2+J*2*32:T=vpeek(II%): if T=VPEEK(II%+2) and T=VPEEK(II%+4) then vpoke II%, 32: vpoke II%+2, 32: vpoke II%+4, 32: : ch=1
 251 next i:next J
-260 FOR J=0 TO 4:FOR I=0TO 2: II%=2+BA%+J*2+I*2*32:T=vpeek(II%): if T=VPEEK(II%+64) and T=VPEEK(II%+128) then vpoke II%, 32: vpoke II%+32, 32: vpoke II%+64, 32: ch=1
+260 FOR J=0 TO 4:FOR I=0TO 2: II%=2+BA%+J*2+I*2*32:T=vpeek(II%): if T=VPEEK(II%+64) and T=VPEEK(II%+128) then vpoke II%, 32: vpoke II%+64, 32: vpoke II%+128,32: ch=1
 261 next i:next J
 300 if ch=0 then 60: else 40
 
