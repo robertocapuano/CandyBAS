@@ -1,21 +1,21 @@
 1 SCREEN1,0:COLOR 10,9,9:CLS:KEY OFF:C%=1:R%=0:BA%=6144:CH=0
-40 FOR I=0 TO 4: II%=2+BA%+I*2: m=vpeek(II%): if m=32 then vpoke II%, RND(1)*4+1: ch=1
+40 ch=0:FOR I=0 TO 4: II%=2+BA%+I*2: m=vpeek(II%): if m=32 then vpoke II%, RND(1)*4+1: ch=1
 41 next i
 50 FOR J=4 TO 1step-1 :FOR I=0TO 4: II%=2+BA%+I*2+J*2*32:m=vpeek(II%): if m=32 then vpoke II%, vpeek(II%-64): vpoke II%-64, 32:ch=1
-51 next i:next J
+51 next i:next J: if ch=1 then 40
 60 II%=2+BA%+C%+R%*32: vpoke II%,42:IJ%=II%:IK%=II%:
-110 KR$=INKEY$:IF KR$="" THEN  40 : else  vpoke II%, 32:
+110 KR$=INKEY$:IF KR$="" THEN 110 : else  vpoke II%, 32:
 130 if KR$=CHR$(28) then C%=C%+2:else if KR$=CHR$(29) then C%=C%-2 
 150 if KR$=CHR$(31) then R%=R%+2 : ELSE if KR$=CHR$(30) then R%=(R%-2) 
 160 IF R%<0 then R%=10:else if C%<0 then C%=10: else if C%>10 then C%=0: else if R%>10 then R%=0
-170 if KR$=" " then if (R%mod2)=1 then IJ%=II%-32:IK%=II%+32: else  IJ%=II%-1:IK%=II%+1:
-180 IF IJ%<>IK% then T=VPEEK(IJ%):VPOKE IJ%,VPEEK(IK%):VPOKE IK%,T:ch=1
+170 if KR$<>" " then 300 else if (R%mod2)=1 then IJ%=II%-32:IK%=II%+32: else  IJ%=II%-1:IK%=II%+1:
+180 IF IJ%<>IK% then T=VPEEK(IJ%):VPOKE IJ%,VPEEK(IK%):VPOKE IK%,T
 
 250 FOR J=0 TO 4:FOR I=0TO 2: II%=2+BA%+I*2+J*2*32:T=vpeek(II%): if T=VPEEK(II%+2) and T=VPEEK(II%+4) then vpoke II%, 32: vpoke II%+2, 32: vpoke II%+4, 32: : ch=1
 251 next i:next J
 260 FOR J=0 TO 4:FOR I=0TO 2: II%=2+BA%+J*2+I*2*32:T=vpeek(II%): if T=VPEEK(II%+64) and T=VPEEK(II%+128) then vpoke II%, 32: vpoke II%+32, 32: vpoke II%+64, 32: ch=1
 261 next i:next J
-300 if ch=0 then 60: else ch=0: goto 40
+300 if ch=0 then 60: else 40
 
 
 ----
