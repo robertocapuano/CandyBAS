@@ -9,7 +9,7 @@
 60 X=B+C+R*32:Y=X:Z=X:vpokeX,42:K$=INKEY$:IFK$=""then60:elsevpokeX,32
 130 ifK$=CHR$(28)andc<7thenC=C+2:elseifK$=CHR$(29)andC>1thenC=C-2
 150 ifK$=CHR$(31)andr<8thenR=R+1:C=Cxor1:elseifK$=CHR$(30)andR>0thenR=R-1:C=Cxor1
-170 ifK$<>" "orC=9then60elseif(Rmod2)=1thenY=X-32:Z=X+32:elseY=X-1:Z=X+1:
+170 ifK$<>" "orC=9then60elseifRmod2=1thenY=X-32:Z=X+32:elseY=X-1:Z=X+1:
 180 T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:goto40
 
 
