@@ -14,6 +14,8 @@
 
 
 ----
+200 T=vpeek(A):ifT=vpeek(A+S)andT=vpeek(A+S*2)thenvpokeA,32:vpokeA+S,32:vpokeA+S*2,32:H=1:RETURN
+
 
 130 if K$=CHR$(28) then if C>=7 then C=1-R MOD 2:else C=C+2
 135 if K$=CHR$(29) then if C<=1 then C=7+R MOD 2:else C=C-2 
