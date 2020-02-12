@@ -1,5 +1,5 @@
-1 SCREEN1,0:COLOR10,9,9:CLS:KEY OFF:DEFINT A-Z:C=1:R=0:B=6283:Z=RND(-TIME)
-40 H=0:FORI=0TO4:A=B+I*2:m=vpeek(A):ifm=32thenvpokeA,RND(1)*4+1:H=1:next:elsenext
+1 SCREEN1,0:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6283:Z=RND(-TIME)
+40 H=0:FORI=0TO4:A=B+I*2:ifvpeek(A)=32thenvpokeA,RND(1)*4+1:H=1:next:elsenext
 50 FOR J=4TO1step-1:FOR I=0TO4:A=B+I*2+J*64:m=vpeek(A):ifm=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
 51 nextI,J:if H=1then40
 55 FORJ=0TO4:FOR I=0TO2:A=B+I*2+J*64:T=vpeek(A):ifT=vpeek(A+2)andT=vpeek(A+4)thenvpokeA,32:vpokeA+2,32:vpokeA+4,32::H=1
