@@ -1,16 +1,44 @@
 1 SCREEN1,0:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6283:Z=RND(-TIME)
 40 H=0:FORI=0TO4:A=B+I*2:ifvpeek(A)=32thenvpokeA,RND(1)*4+1:H=1:next:elsenext
 50 forJ=4TO1step-1:forI=0TO4:A=B+I*2+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
-51 nextI,J:if H=1then40
-55 forJ=0TO4:forI=0TO2:A=B+I*2+J*64:T=vpeek(A):ifT=vpeek(A+2)andT=vpeek(A+4)thenvpokeA,32:vpokeA+2,32:vpokeA+4,32::H=1
-56 nextI,J
-57 forJ=0TO4:forI=0TO2:A=B+J*2+I*64:T=vpeek(A):if T=vpeek(A+64)andT=vpeek(A+128)thenvpokeA,32:vpokeA+64,32:vpokeA+128,32:H=1
-58 nextI,J:ifH=1then40elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T
+51 nextI,J:if H=1then40:elseII=64:IJ=2:fork=0to1:swapII,IJ:forJ=0TO4:forI=0TO2:A=B+J*IJ+I*II:T=vpeek(A):
+52 ifT=vpeek(A+II)andT=vpeek(A+2*II)thenvpokeA,32:vpokeA+II,32:vpokeA+2*II,32::H=1
+58 nextI,J,K:ifH=1then40elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T
 60 X=B+C+R*32:Y=X:Z=X:vpokeX,42:K$=INKEY$:IFK$=""then60:elsevpokeX,32
 130 ifK$=CHR$(28)andc<7thenC=C+2:elseifK$=CHR$(29)andC>1thenC=C-2
 150 ifK$=CHR$(31)andr<8thenR=R+1:C=Cxor1:elseifK$=CHR$(30)andR>0thenR=R-1:C=Cxor1
 170 ifK$<>" "orC=9then60else S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:goto40
 
+
+--
+
+
+1 SCREEN1,0:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6283:Z=RND(-TIME):
+40 H=0:FORI=0TO4:A=B+I*2:ifvpeek(A)=32thenvpokeA,RND(1)*4+1:H=1:next:elsenext
+50 forJ=4TO1step-1:forI=0TO4:A=B+I*2+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
+52 nextI,J:if H=1then40:elseIJ=64:II=2:forK=0to1:SWAPII,IJ:forJ=0TO4:forI=0TO2:A=B+J*IJ+I*II:
+55 T=vpeek(A):ifT=vpeek(A+II)andT=vpeek(A+II*2)thenvpokeA,32:vpokeA+II,32:vpokeA+II*2,32::H=1
+56 nextI,J,k:ifH=1then40elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T
+60 X=B+C+R*32:Y=X:Z=X:vpokeX,42:K$=INKEY$:IFK$=""then60:elsevpokeX,32
+130 ifK$=CHR$(28)andc<7thenC=C+2:elseifK$=CHR$(29)andC>1thenC=C-2
+150 ifK$=CHR$(31)andr<8thenR=R+1:C=Cxor1:elseifK$=CHR$(30)andR>0thenR=R-1:C=Cxor1
+170 ifK$<>" "orC=9then60else S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:goto40
+
+
+---
+
+
+--
+1 SCREEN1,0:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6283:Z=RND(-TIME)
+40 H=0:FORI=0TO4:A=B+I*2:ifvpeek(A)=32thenvpokeA,RND(1)*4+1:H=1:next:elsenext
+50 forJ=4TO1step-1:forI=0TO4:A=B+I*2+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
+51 nextI,J:if H=1then40:fork=0to1:forJ=0TO4:forI=0TO2:A=B+I*2+J*64:T=vpeek(A):
+56 ifT=vpeek(A+2)andT=vpeek(A+4)thenvpokeA,32:vpokeA+2,32:vpokeA+4,32::H=1:
+57 next i,j,k:ifH=1then40elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T
+60 X=B+C+R*32:Y=X:Z=X:vpokeX,42:K$=INKEY$:IFK$=""then60:elsevpokeX,32
+150 ifK$=CHR$(31)andr<8thenR=R+1:C=Cxor1:ifK$=CHR$(30)andR>0thenR=R-1:C=Cxor1
+130 ifK$=CHR$(28)andc<7thenC=C+2:ifK$=CHR$(29)andC>1thenC=C-2:ifK$<>" "orC=9then60
+170  S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:goto40
 
 ----
 200 T=vpeek(A):ifT=vpeek(A+S)andT=vpeek(A+S*2)thenvpokeA,32:vpokeA+S,32:vpokeA+S*2,32:H=1:RETURN
