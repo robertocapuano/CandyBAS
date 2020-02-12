@@ -5,11 +5,11 @@
 55 FORJ=0TO4:FOR I=0TO2:A=B+I*2+J*64:T=vpeek(A):ifT=vpeek(A+2)andT=vpeek(A+4)thenvpokeA,32:vpokeA+2,32:vpokeA+4,32::H=1
 56 nextI,J
 57 FOR J=0TO4:FOR I=0TO2:A=B+J*2+I*64:T=vpeek(A):if T=vpeek(A+64)andT=vpeek(A+128)thenvpokeA,32:vpokeA+64,32:vpokeA+128,32:H=1
-58 nextI,J:ifH=1then40elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:
+58 nextI,J:ifH=1then40elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T
 60 X=B+C+R*32:Y=X:Z=X:vpokeX,42:K$=INKEY$:IFK$=""then60:elsevpokeX,32
-130 ifK$=CHR$(28)andc<7thenC=C+2:elseifK$=CHR$(29)and C>1then C=C-2 
+130 ifK$=CHR$(28)andc<7thenC=C+2:elseifK$=CHR$(29)and C>1thenC=C-2
 150 ifK$=CHR$(31)andr<8thenR=R+1:C=Cxor1:elseifK$=CHR$(30)andR>0thenR=R-1:C=Cxor1
-170 ifK$<>" "orC=9then60elseif(Rmod2)=1then Y=X-32:Z=X+32:else Y=X-1:Z=X+1:
+170 ifK$<>" "orC=9then60elseif(Rmod2)=1thenY=X-32:Z=X+32:elseY=X-1:Z=X+1:
 180 T=vpeek(Y):vpoke Y,vpeek(Z):vpokeZ,T:goto40
 
 
