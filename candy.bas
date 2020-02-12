@@ -21,6 +21,7 @@
 155 if K$=CHR$(30) then if R=0 then R=8: else C=C+R MOD 2-C MOD 2:R=R-1:if C=9 then C=7
 
 ----
+200 vpokeA,32:vpokeA+S,32:vpokeA+S*2,32:H=1:RETURN
 
 print chr$(27)+"p";"Inverted Text"
 
