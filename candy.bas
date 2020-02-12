@@ -2,15 +2,15 @@
 40 H=0:FORI=0TO4:A=B+I*2:m=vpeek(A):ifm=32thenvpokeA,RND(1)*4+1:H=1:next:elsenext
 50 FOR J=4TO1step-1:FOR I=0TO4:A=B+I*2+J*2*32:m=vpeek(A):ifm=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
 51 nextI,J:if H=1then40
-55 FORJ=0TO4:FOR I=0TO2:A=B+I*2+J*2*32:T=vpeek(A):ifT=VPEEK(A+2)andT=VPEEK(A+4)thenvpokeA,32:vpokeA+2,32:vpokeA+4,32::H=1
+55 FORJ=0TO4:FOR I=0TO2:A=B+I*2+J*2*32:T=vpeek(A):ifT=vpeek(A+2)andT=vpeek(A+4)thenvpokeA,32:vpokeA+2,32:vpokeA+4,32::H=1
 56 nextI,J
-57 FOR J=0TO4:FOR I=0TO2:A=B+J*2+I*2*32:T=vpeek(A):if T=VPEEK(A+64)andT=VPEEK(A+128)thenvpokeA,32:vpokeA+64,32:vpokeA+128,32:H=1
-58 nextI,J:ifH=1then40elseT=VPEEK(Y):VPOKEY,VPEEK(Z):VPOKEZ,T:
+57 FOR J=0TO4:FOR I=0TO2:A=B+J*2+I*2*32:T=vpeek(A):if T=vpeek(A+64)andT=vpeek(A+128)thenvpokeA,32:vpokeA+64,32:vpokeA+128,32:H=1
+58 nextI,J:ifH=1then40elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:
 60 X=B+C+R*32:Y=X:Z=X:vpokeX,42:KR$=INKEY$:IFKR$=""THEN60:elsevpokeX,32
 130 ifKR$=CHR$(28)andc<7thenC=C+2:elseifKR$=CHR$(29)and C>1then C=C-2 
-150 ifKR$=CHR$(31)andr<8thenR=R+1:C=CXOR1:elseifKR$=CHR$(30)andR>0thenR=R-1:C=CXOR1
+150 ifKR$=CHR$(31)andr<8thenR=R+1:C=Cxor1:elseifKR$=CHR$(30)andR>0thenR=R-1:C=Cxor1
 170 if KR$<>" "orC=9then60elseif(Rmod2)=1then Y=X-32:Z=X+32:else Y=X-1:Z=X+1:
-180 T=VPEEK(Y):VPOKE Y,VPEEK(Z):VPOKE Z,T:goto 40
+180 T=vpeek(Y):vpoke Y,vpeek(Z):vpokeZ,T:goto40
 
 
 ----
