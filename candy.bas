@@ -1,5 +1,5 @@
 1 SCREEN1,0:COLOR10,9,9:CLS:KEY OFF:DEFINT A-Z:C=1:R=0:BA%=6283:Z=RND(-TIME)
-40 H=0:X=BA%:FORI=0TO4:X=X+2:m=vpeek(X):ifm=32thenvpokeX,RND(1)*4+1:H=1:next:elsenext
+40 H=0:FORI=0TO4:X=BA%+I*2:m=vpeek(X):ifm=32thenvpokeX,RND(1)*4+1:H=1:next:elsenext
 50 FOR J=4TO1step-1:FOR I=0TO4:X=BA%+I*2+J*2*32:m=vpeek(X):ifm=32thenvpokeX,vpeek(X-64):vpokeX-64,32:H=1
 51 next i,J: if H=1 then 40
 55 FORJ=0TO4:FOR I=0TO2:X=BA%+I*2+J*2*32:T=vpeek(X):ifT=VPEEK(X+2)andT=VPEEK(X+4)thenvpokeX,32:vpokeX+2,32:vpokeX+4,32::H=1
