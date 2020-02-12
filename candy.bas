@@ -1,12 +1,12 @@
-1 SCREEN1,0:COLOR10,9,9:CLS:KEY OFF:DEFINT A-Z:C=1:R=0:BA%=6283:Z=RND(-TIME)
-40 H=0:FORI=0TO4:X=BA%+I*2:m=vpeek(X):ifm=32thenvpokeX,RND(1)*4+1:H=1:next:elsenext
-50 FOR J=4TO1step-1:FOR I=0TO4:X=BA%+I*2+J*2*32:m=vpeek(X):ifm=32thenvpokeX,vpeek(X-64):vpokeX-64,32:H=1
-51 next i,J: if H=1 then 40
-55 FORJ=0TO4:FOR I=0TO2:X=BA%+I*2+J*2*32:T=vpeek(X):ifT=VPEEK(X+2)andT=VPEEK(X+4)thenvpokeX,32:vpokeX+2,32:vpokeX+4,32::H=1
-56 next i,J
-57 FOR J=0TO4:FOR I=0TO2:X=BA%+J*2+I*2*32:T=vpeek(X):if T=VPEEK(X+64)andT=VPEEK(X+128)then vpoke X,32:vpoke X+64,32:vpoke X+128,32:H=1
-58 next i,J:if H=1 then 40 else T=VPEEK(Y):VPOKE Y,VPEEK(Z):VPOKE Z,T:
-60 X=BA%+C+R*32:Y=X:Z=X:vpokeX,42:KR$=INKEY$:IFKR$=""THEN60:elsevpokeX,32
+1 SCREEN1,0:COLOR10,9,9:CLS:KEY OFF:DEFINT A-Z:C=1:R=0:B=6283:Z=RND(-TIME)
+40 H=0:FORI=0TO4:A=B+I*2:m=vpeek(A):ifm=32thenvpokeA,RND(1)*4+1:H=1:next:elsenext
+50 FOR J=4TO1step-1:FOR I=0TO4:A=B+I*2+J*2*32:m=vpeek(A):ifm=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
+51 nextI,J:if H=1then40
+55 FORJ=0TO4:FOR I=0TO2:A=B+I*2+J*2*32:T=vpeek(A):ifT=VPEEK(A+2)andT=VPEEK(A+4)thenvpokeA,32:vpokeA+2,32:vpokeA+4,32::H=1
+56 nextI,J
+57 FOR J=0TO4:FOR I=0TO2:A=B+J*2+I*2*32:T=vpeek(A):if T=VPEEK(A+64)andT=VPEEK(A+128)thenvpokeA,32:vpokeA+64,32:vpokeA+128,32:H=1
+58 nextI,J:ifH=1then40elseT=VPEEK(Y):VPOKEY,VPEEK(Z):VPOKEZ,T:
+60 X=B+C+R*32:Y=X:Z=X:vpokeX,42:KR$=INKEY$:IFKR$=""THEN60:elsevpokeX,32
 130 ifKR$=CHR$(28)andc<7thenC=C+2:elseifKR$=CHR$(29)and C>1then C=C-2 
 150 ifKR$=CHR$(31)andr<8thenR=R+1:C=CXOR1:elseifKR$=CHR$(30)andR>0thenR=R-1:C=CXOR1
 170 if KR$<>" "orC=9then60elseif(Rmod2)=1then Y=X-32:Z=X+32:else Y=X-1:Z=X+1:
@@ -27,15 +27,15 @@ print chr$(27)+"p";"Inverted Text"
 if peek(&HFBEB)and2 then else ?"CTRL pressed"
 
 
-170 if KR$=" " then  H=1: X=2+1+BA%+C*2+R*2*32;S0=vpeek(  BA%+I*2+2  I1%=R1%*5+C1%:I0%=R0%*5+C0%:SWAP M%(I0%),M%(I1%): H=1
+170 if KR$=" " then  H=1: X=2+1+B+C*2+R*2*32;S0=vpeek(  B+I*2+2  I1%=R1%*5+C1%:I0%=R0%*5+C0%:SWAP M%(I0%),M%(I1%): H=1
 190 if H=0 then 300
 
-1 SCREEN1,0:COLOR 10,9,9:CLS:KEY OFF:C1%=0:R1%=0:C0%=0:R0%=0:R=0:C=0:BA%=6144
+1 SCREEN1,0:COLOR 10,9,9:CLS:KEY OFF:C1%=0:R1%=0:C0%=0:R0%=0:R=0:C=0:B=6144
 30 PRINT CHR$(27)+CHR$(121)+CHR$(53)
 
-40 FOR I=0 TO 4: X=BA%+I*2+2: m=vpeek(X): if m=32 then vpoke X, RND(1)*4+1
+40 FOR I=0 TO 4: X=B+I*2+2: m=vpeek(X): if m=32 then vpoke X, RND(1)*4+1
 41 next i:locate R1+1,C1
-50 FOR J=4 TO 1step-1 :FOR I=0TO 4: X=BA%+I*2+J*2*32:m=vpeek(X): if m=32 then vpoke X, vpeek(X-64): vpoke X-64, 32
+50 FOR J=4 TO 1step-1 :FOR I=0TO 4: X=B+I*2+J*2*32:m=vpeek(X): if m=32 then vpoke X, vpeek(X-64): vpoke X-64, 32
 51 next i:next J
 
 100 goto 40
