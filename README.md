@@ -6,8 +6,9 @@ Player tries to align 3 candies in sequence to grab them.
 Candy shapes are:
 - &hearts; heart
 - &diams; diamond
-- &#x263A; face
-- &#x263B; another face
+- &#x263B; face
+- &#x263A; reverse face
+
 Player swaps candies to try to align them, if a move doesn't align 3 shapes they return to previous position.
 
 # Controls
