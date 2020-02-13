@@ -43,7 +43,7 @@ run
 ```
 1 SCREEN1:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6283:Z=RND(-TIME):U=64:V=2
 ```
-- SCREEN1: select 32x24 text mode, colors and 
+- SCREEN1: select 32x24 text mode
 - COLOR10,9,9: select color yellow on red
 - CLS: clear screen
 - KEY OFF: hide command bar
