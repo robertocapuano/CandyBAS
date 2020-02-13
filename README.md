@@ -57,6 +57,7 @@ run
 2 F$=CHR$(28):H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
 ```
 - F$ contains ASCII code for cursor movement, to reduce line length
+- G: contains video memory pointer to actual row procesed
 - H=0: change flag of puzzle content
 - FORI=... initialize first row with random symbols
 
@@ -64,6 +65,7 @@ run
 3 forJ=4TO1step-1:A=G+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
 ```
 - Scroll values for a row to the next one if this is empty (ASCII 32)
+- A: contains video memory pointer to actual char procesed
 
 ```
 4 nextJ,I:ifH=1then2elseforK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A)
