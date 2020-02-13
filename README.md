@@ -13,7 +13,7 @@ Player swaps candies to try to align them, if a move doesn't align 3 shapes they
 
 # Controls
 Arrow keys are used to move the cursor and space bar to swap candies on screen.
-Cursor movement is like over a chessboard, at any moment only two candy are adajcent to the cursor, swap acts on these ones.
+Cursor movement is like over a chessboard: at any moment only two candies are adajcent to the cursor, swap acts on these ones.
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
 
