@@ -1,5 +1,5 @@
 # CandyBAS
-CandyBAS is a match-3 puzzle in 10 lines of MSX2 BASIC v3
+CandyBAS is a match-3 puzzle game in 10 lines of MSX2 BASIC v3
 
 # Game Logic
 Player tries to align 3 candies in sequence to grab them.
@@ -43,7 +43,7 @@ run
 ```
 1 SCREEN1:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6283:Z=RND(-TIME):U=64:V=2
 ```
-- SCREEN1:select 32x24 text mode, colors and 
+- SCREEN1: select 32x24 text mode, colors and 
 - COLOR10,9,9: select color yellow on red
 - CLS: clear screen
 - KEY OFF: hide command bar
@@ -63,25 +63,24 @@ run
 ```
 3 forJ=4TO1step-1:A=G+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
 ```
-- Scrolls value for a row to the next one in case of space: ASCII code 32
+- Scroll values for a row to the next one if this is empty (ASCII 32)
 
 ```
 4 nextJ,I:ifH=1then2elseforK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A)
 ```
 - if change flag is setted repeat previous step
-- start match-3 for loop
+- else start match-3 check loop
 
 ```
 5 ifT=vpeek(A+U)andT=vpeek(A+2*U)thenvpokeA,32:vpokeA+U,32:vpokeA+2*U,32:H=1:Y=Z
 ```
-- otherwise checks if there are 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets
-- end match-3 for loop
+- checks if there are 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
 
 ```
 6 nextI,J:swapU,V:nextK:ifH=1then2elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T
 ```
 - if change flag is setted repeat previous steps
-- otherwise reverse symbols switch
+- otherwise reverse symbols switch: no match-3 performed
 
 ```
 7 X=B+C+R*32:Y=X:Z=X:vpokeX,254:K$=INKEY$:IFK$=""then7:elsevpokeX,32
@@ -89,7 +88,7 @@ run
 - X contains cursor video memory pointer
 - Y,Z: adjacents symbols pointers
 - vpokeX,254: show cursor
-- K$=INKEY$:IFK$=""then7 read an input
+- K$=INKEY$:IFK$=""then7 read keyboard input
 - pokeX,32: hide cursor
 
 ```
@@ -97,7 +96,7 @@ run
 ```
 - K$==CHR$(31) in case of down direction: cursor is moved to next row: R=R+1
 - K$==CHR$(30) in case of up direction: cursor is moved to previous row: R=R-1
-- C=Cxor1: alternates position like a chessboard
+- C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
 9 ifK$=F$andc<7thenC=C+2:elseifK$=CHR$(29)andC>1thenC=C-2:elseS=1+31*(Rmod2)
@@ -108,4 +107,4 @@ run
 ```
 10 ifK$<>" "orC=9then7else:Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:goto2
 ```
-- T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T: In case of space key symbols are inverted and program repeat the loop.
+- In case of space key symbols are inverted and program repeat the loop
