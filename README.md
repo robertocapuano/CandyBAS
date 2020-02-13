@@ -2,21 +2,22 @@
 CandyBAS is a match-3 puzzle in 10 lines of MSX2 BASIC v3
 
 # Game Logic
-Player tries to align 3 symbols in sequence to remove them.
-Symbols are:
+Player tries to align 3 candies in sequence to grab them.
+Candy shapes are:
 - &hearts; heart
 - &diams; diamond
-- &#128521; face
+- &#x263A; face
 - &#x263B; another face
+Player swaps candies to try to align them, if a move doesn't align 3 shapes they return to previous position.
 
 # Controls
-Player uses arrow keys to move the cursor and space bar to swap symbols on screen.
-Cursor movement is like over a chessboard: at any moment only two symbols are adajcent to the cursor and the swap in not clear.
+Arrow keys are used to move the cursor and space bar to swap candies on screen.
+Cursor movement is like over a chessboard, at any moment only two candy are adajcent to the cursor, swap acts on these ones.
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
 
 # Installation
-Game was developed with MSX-BASIC v3 on a MSX2+. Emulator is available at https://webmsx.org/
+Game was developed in MSX-BASIC v3 on a MSX2+. Emulator is available at https://webmsx.org/
 1. connect to https://webmsx.org/
 2. click on the first floppy icon below the blue screen
 3. Select "Add Disk Images"
