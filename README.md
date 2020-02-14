@@ -17,7 +17,6 @@ Cursor movement is like over a chessboard: at any moment only two candies are ad
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
 
-
 ![screenshot](screenshot.png)
 
 # Installation
