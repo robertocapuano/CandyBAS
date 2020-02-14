@@ -17,6 +17,9 @@ Cursor movement is like over a chessboard: at any moment only two candies are ad
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
 
+
+![screenshot](screenshot.png)
+
 # Installation
 Game was developed in MSX-BASIC v3 on a MSX2+. Emulator is available at https://webmsx.org/
 1. connect to https://webmsx.org/
@@ -38,7 +41,6 @@ otherwise
 run
 ```
 
-![screenshot](screenshot.png)
 
 # Source Description
 
