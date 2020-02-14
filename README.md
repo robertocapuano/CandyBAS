@@ -117,13 +117,13 @@ run
 ```
 9 k=ASC(k$):ifK=31andr<8thenR=R+1:C=Cxor1:elseifK=30andR>0thenR=R-1:C=Cxor1
 ```
-- K$==CHR$(31) in case of down direction: cursor is moved to next row: R=R+1
-- K$==CHR$(30) in case of up direction: cursor is moved to previous row: R=R-1
+- K=31 in case of down direction: cursor is moved to next row: R=R+1
+- K=30 in case of up direction: cursor is moved to previous row: R=R-1
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
 10 ifK=28andc<7thenC=C+2:goto8:elseifK=29andC>1thenC=C-2:goto8:else8
 ```
-- K$==chr$(28) in case of left direction: cursor is moved to previous column: C=C-2
-- K$==CHR$(29) in case of right direction: cursor is moved to next column: C=C+2
+- K=28 in case of left direction: cursor is moved to previous column: C=C-2
+- K=29 in case of right direction: cursor is moved to next column: C=C+2
 
