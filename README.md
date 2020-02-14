@@ -1,6 +1,8 @@
 # CandyBAS
 CandyBAS is a match-3 puzzle game in 10 lines of MSX2 BASIC v3
 
+![screenshot](screenshot.png)
+
 # Game Logic
 Player tries to align 3 candies in sequence to grab them.
 Candy shapes are:
@@ -16,8 +18,6 @@ Arrow keys are used to move the cursor and space bar to swap candies on screen.
 Cursor movement is like over a chessboard: at any moment only two candies are adajcent to the cursor, swap acts on these ones.
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
-
-![screenshot](screenshot.png)
 
 # Installation
 Game was developed in MSX-BASIC v3 on a MSX2+. Emulator is available at https://webmsx.org/
