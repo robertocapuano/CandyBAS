@@ -11,7 +11,7 @@ Candy shapes are:
 - &#x263B; face
 - &#x263A; reverse face
 
-Player swaps candies to try to align them, if a move doesn't align 3 shapes they return to previous position.
+Player swaps candies to try to align them, if a move doesn't align 3 shapes they return to previous position and points are resetted.
 
 # Controls
 Arrow keys are used to move the cursor and space bar to swap candies on screen.
@@ -40,11 +40,10 @@ otherwise
 run
 ```
 
-
 # Source Description
 
 ```
-1 SCREEN1:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6283:Z=RND(-TIME):U=64:V=2
+1 SCREEN1:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:B=6283:X=B:Z=RND(-TIME):U=64:V=2
 ```
 - SCREEN1: select 32x24 text mode
 - COLOR10,9,9: select color yellow on red
@@ -56,9 +55,8 @@ run
 - Z=RND(-TIME): initialize random number generator
 - U=64,V=2: U,V contains offset values for next row and next column
 
-
 ```
-2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1
+2 S=1+31*F:Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:ifW=0thenM=0
 ```
 - S contains offset to adjacent cell
 - X: pointer to cursor cell
@@ -68,7 +66,7 @@ run
 - W=2: user swaps symbols, W=1 swap operation doens't obtain a match-3, W=0: no operation
 
 ```
-3 locate25,0:printM:H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
+3 locate24,0:?M" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
 ```
 - M: contains player points
 - G: contains video memory pointer to actual row procesed
@@ -93,7 +91,7 @@ run
 - checks if there are 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
 
 ```
-6 nextI,J:swapU,V:nextK:ifH=1then2elseT=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T
+6 ifT=vpeek(A+U)andT=vpeek(A+2*U)thenvpokeA,32:vpokeA+U,32:vpokeA+2*U,32:H=H+1
 ```
 - if change flag is setted repeat previous steps
 - otherwise reverse symbols switch: no match-3 performed
@@ -122,7 +120,7 @@ run
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
-10 ifK=28andc<7thenC=C+2:goto8:elseifK=29andC>1thenC=C-2:goto8:else8
+10 F=Rmod2:ifK=28andC<7thenC=C+2:goto8:elseifK=29andC>1thenC=C-2:goto8:else8
 ```
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2
 - K=29 in case of right direction: cursor is moved to next column: C=C+2
