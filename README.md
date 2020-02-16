@@ -66,7 +66,7 @@ run
 - W=2: user swaps symbols, W=1 swap operation doens't obtain a match-3, W=0: no operation
 
 ```
-3 locate24,0:?P" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
+3 locate21,0:?"PTS"P" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
 ```
 - P: contains player points
 - G: contains video memory pointer to actual row procesed
