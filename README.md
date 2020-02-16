@@ -16,6 +16,7 @@ Player swaps candies to try to align them, if a move doesn't align 3 or more sha
 # Controls
 Arrow keys are used to move the cursor and space bar to swap candies on screen.
 Cursor movement is like over a chessboard: at any moment only two candies are adajcent to the cursor, swap acts on these ones.
+ESCAPE key to generate a new puzzle.
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
 
@@ -43,7 +44,7 @@ run
 # Source Description
 
 ```
-1 SCREEN1:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:B=6283:X=B:Z=RND(-TIME):U=64:V=2
+1 SCREEN1:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6347:X=B:Z=RND(-TIME):U=64:V=2:P=0
 ```
 - SCREEN1: select 32x24 text mode
 - COLOR10,9,9: select color yellow on red
@@ -56,7 +57,7 @@ run
 - U=64,V=2: U,V contains offset values for next row and next column
 
 ```
-2 S=1+31*F:Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:ifW=0thenP=0
+2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:BEEP:ifW=0thenP=0
 ```
 - S contains offset to adjacent cell
 - X: pointer to cursor cell
@@ -66,7 +67,7 @@ run
 - W=2: user swaps symbols, W=1 swap operation doens't obtain a match-3, W=0: no operation
 
 ```
-3 locate24,0:?P" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
+3 locate21,0:?"PTS "P" ":locate1,0:?"HIGH "E" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
 ```
 - P: contains player points
 - G: contains video memory pointer to actual row procesed
@@ -86,12 +87,12 @@ run
 - else start match-3 check loop
 
 ```
-6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next
+6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:beep:
 ```
 - checks if there are at least 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
 
 ```
-7 H=H-(N>2):nextI,J:swapU,V:next:ifH>0thenP=P+H:W=0:goto3:elseifW>0then2:elseW=2
+7 H=H-(N>2):nextI,J:swapU,V:next:ifH>0thenP=P+H:E=E-(P>E)*H:W=0:goto3:elseifW>0then2:elseW=2
 ```
 - add to H 1 in case of a match
 - if H the change flag is setted repeat previous steps
@@ -118,7 +119,7 @@ run
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
-10 F=Rmod2:ifK=28andC<7thenC=C+2:goto8:elseifK=29andC>1thenC=C-2:goto8:else8
+10 ifK=27then1:elseifK=28andC<7thenC=C+2:goto8:elseifK=29andC>1thenC=C-2:goto8:else8
 ```
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2
 - K=29 in case of right direction: cursor is moved to next column: C=C+2
