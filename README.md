@@ -11,7 +11,7 @@ Candy shapes are:
 - &#x263B; face
 - &#x263A; reverse face
 
-Player swaps candies to try to align them, if a move doesn't align 3 shapes they return to previous position and points are resetted.
+Player swaps candies to try to align them, if a move doesn't align 3 or more shapes they return to previous position and points are resetted.
 
 # Controls
 Arrow keys are used to move the cursor and space bar to swap candies on screen.
@@ -56,7 +56,7 @@ run
 - U=64,V=2: U,V contains offset values for next row and next column
 
 ```
-2 S=1+31*F:Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:ifW=0thenM=0
+2 S=1+31*F:Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:ifW=0thenP=0
 ```
 - S contains offset to adjacent cell
 - X: pointer to cursor cell
@@ -66,9 +66,9 @@ run
 - W=2: user swaps symbols, W=1 swap operation doens't obtain a match-3, W=0: no operation
 
 ```
-3 locate24,0:?M" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
+3 locate24,0:?P" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
 ```
-- M: contains player points
+- P: contains player points
 - G: contains video memory pointer to actual row procesed
 - H=0: change flag of puzzle content
 - FORI=... initialize first row with random symbols
@@ -80,28 +80,26 @@ run
 - A: contains video memory pointer to actual char procesed
 
 ```
-5 nextJ,I:ifH=1then3elseforK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A)
+5 nextJ,I:ifH=1then3elseforK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0
 ```
 - if change flag is setted repeat previous step
 - else start match-3 check loop
 
 ```
-6 ifT=vpeek(A+U)andT=vpeek(A+2*U)thenvpokeA,32:vpokeA+U,32:vpokeA+2*U,32:H=H+1
+6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next
 ```
-- checks if there are 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
+- checks if there are at least 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
 
 ```
-6 ifT=vpeek(A+U)andT=vpeek(A+2*U)thenvpokeA,32:vpokeA+U,32:vpokeA+2*U,32:H=H+1
+7 H=H-(N>2):nextI,J:swapU,V:next:ifH>0thenP=P+H:W=0:goto3:elseifW>0then2:elseW=2
 ```
-- if change flag is setted repeat previous steps
+- add to H 1 in case of a match
+- if H the change flag is setted repeat previous steps
 - otherwise reverse symbols switch: no match-3 performed
-
-```
-7 nextI,J:swapU,V:nextK:ifH>0thenM=M+H:W=0:goto3:elseifW>0then2:elseW=2
-```
-- H>0 player did almost one match-3, W=0 no other swaps are necessary
-- W>0 player failed to obtain a match-3, a reverse swap will be done
-- W=2 reset value to 2
+- H>0 player did almost one match
+- W=0 no other swaps are necessary
+- W>0 player failed to obtain a match, a reverse swap will be done
+- reset value of W=2
 
 ```
 8 X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
