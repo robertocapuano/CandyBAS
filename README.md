@@ -40,6 +40,9 @@ otherwise
 run
 ```
 
+MSXPen link:
+- https://msxpen.com/?code=-M0HbGDNyallnQfqWoIp
+
 # Source Description
 
 ```
