@@ -40,6 +40,9 @@ otherwise
 run
 ```
 
+WebMSX Launch URL:
+- https://webmsx.org?MACHINE=MSX2P&DISK=https://github.com/robertocapuano/CandyBAS/raw/master/candy.dsk&BASIC_RUN=candy.bas
+
 MSXPen link:
 - https://msxpen.com/?code=-M0HbGDNyallnQfqWoIp
 
