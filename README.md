@@ -113,7 +113,7 @@ MSXPen link:
 - X contains cursor video memory pointer
 - K$=INKEY$:IFK$=""then7 read keyboard input
 - vpokeX,254: show cursor
-- in case user press space bar and the cursor is on the right side then nothing is done
+- if user presses space bar and the cursor is on the right side nothing is done
 - pokeX,32: hide cursor
 
 ```
