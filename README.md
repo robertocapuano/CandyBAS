@@ -83,7 +83,7 @@ MSXPen link:
 4 forJ=4TO1step-1:A=G+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
 ```
 - Scroll values for a row to the next one if this is empty (ASCII 32)
-- A: contains video memory pointer to actual char procesed
+- A: contains video memory pointer to actual processed char
 
 ```
 5 nextJ,I:ifH=1then3elseforK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0
@@ -99,8 +99,8 @@ MSXPen link:
 ```
 7 H=H-(N>2):nextI,J:swapU,V:next:ifH>0thenP=P+H:W=0:goto3:elseifW>0then2:elseW=2
 ```
-- add to H 1 in case of a match
-- if H the change flag is setted repeat previous steps
+- add 1 to H in case of a match
+- if H, the change flag, is setted repeat previous steps
 - otherwise reverse symbols switch: no match-3 performed
 - H>0 player did almost one match
 - W=0 no other swaps are necessary
