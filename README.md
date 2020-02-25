@@ -47,7 +47,7 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/codes/-M0wFdqepuIeBOrfO9Z7
+- https://msxpen.com/codes/-M0wRIro2xyh929DLXSW
 
 # Source Description
 
