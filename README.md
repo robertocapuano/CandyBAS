@@ -1,6 +1,7 @@
 # CandyBAS PUR120
 CandyBAS is a match-3 puzzle game in 10 lines of MSX2 BASIC v3.
-PUR120 is a features enhanced version of PUR80 version:
+
+PUR120 is a enhanced version with:
 - Sounds
 - High Score
 - Start Screen
