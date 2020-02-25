@@ -14,9 +14,11 @@ Candy shapes are:
 Player swaps candies to try to align them, if a move doesn't align 3 or more shapes they return to previous position and points are resetted.
 
 # Controls
-Arrow keys are used to move the cursor and space bar to swap candies on screen.
 Cursor movement is like over a chessboard: at any moment only two candies are adajcent to the cursor, swap acts on these ones.
-ESCAPE key to restart the game
+- Arrow keys are used to move the cursor
+- SPACEBAR to swap candies on screen.
+- ESCAPE key to restart the game
+
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
 
