@@ -132,6 +132,7 @@ MSXPen link:
 ```
 10 ifK=27then1:elseifK=28andC<7thenC=C+2:goto8:elseifK=29andC>1thenC=C-2:goto8:else8
 ```
+- K=27 in case of ESC key game is restarted
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2
 - K=29 in case of right direction: cursor is moved to next column: C=C+2
 
