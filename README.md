@@ -16,7 +16,7 @@ Player swaps candies to try to align them, if a move doesn't align 3 or more sha
 # Controls
 Arrow keys are used to move the cursor and space bar to swap candies on screen.
 Cursor movement is like over a chessboard: at any moment only two candies are adajcent to the cursor, swap acts on these ones.
-ESCAPE key to generate a new puzzle.
+ESCAPE key to restart the game
 
 Sources are stored at: https://github.com/robertocapuano/CandyBAS
 
@@ -44,20 +44,21 @@ run
 # Source Description
 
 ```
-1 SCREEN1:COLOR10,9,9:CLS:KEYOFF:DEFINTA-Z:C=1:R=0:B=6347:X=B:Z=RND(-TIME):U=64:V=2:P=0
+1 SCREEN1:COLOR10,9,9:KEYOFF:DEFINTA-Z:C=1:R=0:B=6347:X=B:Z=RND(-TIME):U=64:V=2:P=0:?TAB(10)"CandyBAS";:K$=INPUT$(1):CLS
 ```
 - SCREEN1: select 32x24 text mode
 - COLOR10,9,9: select color yellow on red
-- CLS: clear screen
 - KEY OFF: hide command bar
 - DEF INT A-Z: set A-Z as integer variables
 - C=1,R=0: initial cursor position, column 1, row 0
 - B=6283: base video memory address for screen1
 - Z=RND(-TIME): initialize random number generator
 - U=64,V=2: U,V contains offset values for next row and next column
+- print title and wait a key
+- CLS: clear screen
 
 ```
-2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:BEEP:ifW=0thenP=0
+2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:PLAY"L15"+CHR$(69+W):ifW=0thenP=0
 ```
 - S contains offset to adjacent cell
 - X: pointer to cursor cell
@@ -65,6 +66,7 @@ run
 - T: temporary value of Y
 - vpokeY... swaps values
 - W=2: user swaps symbols, W=1 swap operation doens't obtain a match-3, W=0: no operation
+- PLAY"L15"+CHR$(69+W): play a dynamic sound based on the number of moves
 
 ```
 3 locate21,0:?"PTS "P" ":locate1,0:?"HIGH "E" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
@@ -87,7 +89,7 @@ run
 - else start match-3 check loop
 
 ```
-6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:beep:
+6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:PLAY"L15A"+CHR$(65+H+N)
 ```
 - checks if there are at least 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
 
@@ -101,6 +103,7 @@ run
 - W=0 no other swaps are necessary
 - W>0 player failed to obtain a match, a reverse swap will be done
 - reset value of W=2
+- PLAY"L15A"+CHR$(65+H+N): play a dynamic sound based on the number of matches done
 
 ```
 8 X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
