@@ -47,12 +47,12 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/codes/-M0wRIro2xyh929DLXSW
+- https://msxpen.com/codes/-M0xL0r0e7f21Tis2IPb
 
 # Source Description
 
 ```
-1 SCREEN1:COLOR10,9,9:KEYOFF:DEFINTA-Z:C=1:R=0:B=6347:X=B:Z=RND(-TIME):U=64:V=2:P=0:?TAB(10)"CandyBAS";:K$=INPUT$(1):CLS
+1 SCREEN1:COLOR10,9,9:KEYOFF:DEFINTA-Z:C=1:R=0:B=6347:X=B:Z=RND(-TIME):P=0:locate10,10:?"CandyBAS";:K$=INPUT$(1):CLS
 ```
 - SCREEN1: select 32x24 text mode
 - COLOR10,9,9: select color yellow on red
@@ -61,7 +61,6 @@ MSXPen link:
 - C=1,R=0: initial cursor position, column 1, row 0
 - B=6283: base video memory address for screen1
 - Z=RND(-TIME): initialize random number generator
-- U=64,V=2: U,V contains offset values for next row and next column
 - print title and wait a key
 - CLS: clear screen
 
@@ -91,18 +90,19 @@ MSXPen link:
 - A: contains video memory pointer to actual char procesed
 
 ```
-5 nextJ,I:ifH=1then3elseforK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0
+5 nextJ,I:ifH=1then3else:U=64:V=2:forK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0
 ```
+- U=64,V=2: U,V contains offset values for next row and next column
 - if change flag is setted repeat previous step
 - else start match-3 check loop
 
 ```
-6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:PLAY"L15A"+CHR$(65+H+N)
+6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:PLAY"L15A"+CHR$(65-H+N)
 ```
 - checks if there are at least 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
 
 ```
-7 H=H-(N>2):nextI,J:swapU,V:next:ifH>0thenP=P+H:E=E-(P>E)*H:W=0:goto3:elseifW>0then2:elseW=2
+7 H=H-(N>2):nextI,J:swapU,V:nextK:ifH>0thenP=P+H:E=E-(P>E)*H:W=0:goto3:elseifW>0then2:elseW=2
 ```
 - add to H 1 in case of a match
 - if H the change flag is setted repeat previous steps
