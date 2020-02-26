@@ -52,12 +52,12 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/codes/-M0xgd3Ueo7i4KguXy4j
+- https://msxpen.com/codes/-M12-WMmeSYcqN7yzwoh
 
 # Source Description
 
 ```
-1 SCREEN1:COLOR10,9,9:KEYOFF:DEFINTA-Z:C=1:R=0:B=6347:X=B:Z=RND(-TIME):P=0:locate10,10:?"CandyBAS";:K$=INPUT$(1):CLS
+1 SCREEN1,0,0:COLOR10,9,9:KEYOFF:DEFINTA-Z:C=1:R=0:B=6347:X=B:Z=RND(-TIME):P=0:locate10,10:?"CandyBAS";:K$=INPUT$(1):CLS
 ```
 - SCREEN1: select 32x24 text mode
 - COLOR10,9,9: select color yellow on red
@@ -70,7 +70,7 @@ MSXPen link:
 - CLS: clear screen
 
 ```
-2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:PLAY"O4L15"+CHR$(69+W):ifW=0thenP=0
+2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:PLAY"T120O4L15"+CHR$(69+W):ifW=0thenP=0
 ```
 - S contains offset to adjacent cell
 - X: pointer to cursor cell
@@ -102,10 +102,11 @@ MSXPen link:
 - else start match-3 check loop
 
 ```
-6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:PLAY"O4L15A"+CHR$(65-H+N)
+6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:PLAY"T120O4L15A"+CHR$(65-H+N)
 ```
 - checks if there are at least 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
 
+- PLAY"L15A"+CHR$(65+H+N): play a dynamic sound based on the number of matches done
 ```
 7 H=H-(N>2):nextI,J:swapU,V:nextK:ifH>0thenP=P+H:E=E-(P>E)*H:W=0:goto3:elseifW>0then2:elseW=2
 ```
@@ -116,7 +117,6 @@ MSXPen link:
 - W=0 no other swaps are necessary
 - W>0 player failed to obtain a match, a reverse swap will be done
 - reset value of W=2
-- PLAY"L15A"+CHR$(65+H+N): play a dynamic sound based on the number of matches done
 
 ```
 8 X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
@@ -128,14 +128,14 @@ MSXPen link:
 - pokeX,32: hide cursor
 
 ```
-9 k=ASC(k$):ifK=31andr<8thenR=R+1:C=Cxor1:PLAY"O3L11B":elseifK=30andR>0thenR=R-1:C=Cxor1:PLAY"O3L11B"
+9 k=ASC(k$):ifK=31andr<8thenR=R+1:C=Cxor1:PLAY"T250O4L11C":elseifK=30andR>0thenR=R-1:C=Cxor1:PLAY"T250O4L11C"
 ```
 - K=31 in case of down direction: cursor is moved to next row: R=R+1
 - K=30 in case of up direction: cursor is moved to previous row: R=R-1
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
-10 ifK=27then1:elseifK=28andC<7thenC=C+2:PLAY"MO3L11A":goto8:elseifK=29andC>1thenC=C-2:PLAY"O3L11A":goto8:else8
+10 ifK=27then1:elseifK=28andC<7thenC=C+2:PLAY"T250O4L11D":goto8:elseifK=29andC>1thenC=C-2:PLAY"T250O4L11D":goto8:else8
 ```
 - K=27 in case of ESC key game is restarted
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2
