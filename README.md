@@ -52,7 +52,7 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/codes/-M0xgd3Ueo7i4KguXy4j
+- https://msxpen.com/codes/-M10iU8b4obbsXI941EX
 
 # Source Description
 
@@ -128,14 +128,14 @@ MSXPen link:
 - pokeX,32: hide cursor
 
 ```
-9 k=ASC(k$):ifK=31andr<8thenR=R+1:C=Cxor1:PLAY"O3L11B":elseifK=30andR>0thenR=R-1:C=Cxor1:PLAY"O3L11B"
+9 k=ASC(k$):ifK=31andr<8thenR=R+1:C=Cxor1:elseifK=30andR>0thenR=R-1:C=Cxor1
 ```
 - K=31 in case of down direction: cursor is moved to next row: R=R+1
 - K=30 in case of up direction: cursor is moved to previous row: R=R-1
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
-10 ifK=27then1:elseifK=28andC<7thenC=C+2:PLAY"MO3L11A":goto8:elseifK=29andC>1thenC=C-2:PLAY"O3L11A":goto8:else8
+10 ifK=27then1:elseifK=28andC<7thenC=C+2:goto8:elseifK=29andC>1thenC=C-2:goto8:else8
 ```
 - K=27 in case of ESC key game is restarted
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2
