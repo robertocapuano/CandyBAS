@@ -53,7 +53,7 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/codes/-M14JYNuTUVoZNflqlnO
+- https://msxpen.com/?code=-M14Pt3p4mWDhXT8BbV3
 
 # Source Description
 
@@ -120,7 +120,7 @@ MSXPen link:
 - reset value of W=2
 
 ```
-8 X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
+8 CM$="T250O4L11D":RM$="T250O4L11C":X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
 ```
 - X contains cursor video memory pointer
 - K$=INKEY$:IFK$=""then7 read keyboard input
@@ -129,14 +129,14 @@ MSXPen link:
 - pokeX,32: hide cursor
 
 ```
-9 k=ASC(k$):ifK=31andr<8thenR=R+1:C=Cxor1:PLAY"T250O4L11C":elseifK=30andR>0thenR=R-1:C=Cxor1:PLAY"T250O4L11C"
+9 k=ASC(k$)::ifK=31andr<8thenR=R+1:C=Cxor1:playRM$:elseifK=30andR>0thenR=R-1:C=Cxor1:playRM$
 ```
 - K=31 in case of down direction: cursor is moved to next row: R=R+1
 - K=30 in case of up direction: cursor is moved to previous row: R=R-1
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
-10 ifK=27then1:elseifK=28andC<7thenC=C+2:PLAY"T250O4L11D":goto8:elseifK=29andC>1thenC=C-2:PLAY"T250O4L11D":goto8:else8
+10 ifK=27thenW=0:goto1:elseifK=28andC<7thenC=C+2:playCM$:goto8:elseifK=29andC>1thenC=C-2:playCM$:goto8:else8
 ```
 - K=27 in case of ESC key game is restarted
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2
