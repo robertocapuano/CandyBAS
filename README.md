@@ -122,6 +122,8 @@ MSXPen link:
 ```
 8 CM$="T250O4L11D":RM$="T250O4L11C":X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
 ```
+- CM$: contains play string for coloumn change
+- RM$:contains play string for row change
 - X contains cursor video memory pointer
 - K$=INKEY$:IFK$=""then7 read keyboard input
 - vpokeX,254: show cursor
