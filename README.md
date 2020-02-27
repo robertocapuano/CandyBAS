@@ -17,7 +17,7 @@ Candy shapes are:
 - &#x263B; face
 - &#x263A; reverse face
 
-Player swaps candies to try to align them, if a move doesn't align 3 or more shapes they return to previous position and points are resetted.
+Player swaps candies to try to align them, if a move doesn't align 3 or more shapes they return to previous position and points are decremented.
 
 # Controls
 Cursor movement is like over a chessboard: at any moment only two candies are adajcent to the cursor, swap acts on these ones.
@@ -71,7 +71,7 @@ MSXPen link:
 - CLS: clear screen
 
 ```
-2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:PLAY"T120O4L15"+CHR$(69+W):ifW=0thenP=0
+2 S=1+31*(Rmod2):Y=X-S:Z=X+S:T=vpeek(Y):vpokeY,vpeek(Z):vpokeZ,T:W=W-1:PLAY"T120O4L15"+CHR$(69+W):ifW=0thenP=P-1
 ```
 - S contains offset to adjacent cell
 - X: pointer to cursor cell
