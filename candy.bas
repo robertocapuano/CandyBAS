@@ -5,6 +5,6 @@
 5 nextJ,I:ifH=1then3else:U=64:V=2:forK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0
 6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:PLAY"T120O4L15A"+CHR$(65-H+N)
 7 H=H-(N>2):nextI,J:swapU,V:nextK:ifH>0thenP=P+H:E=E-(P>E)*H:W=0:goto3:elseifW>0then2:elseW=2
-8 X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
-9 k=ASC(k$):ifK=31andr<8thenR=R+1:C=Cxor1:PLAY"T250O4L11C":elseifK=30andR>0thenR=R-1:C=Cxor1:PLAY"T250O4L11C"
-10 ifK=27then1:elseifK=28andC<7thenC=C+2:PLAY"T250O4L11D":goto8:elseifK=29andC>1thenC=C-2:PLAY"T250O4L11D":goto8:else8
+8 CM$="T250O4L11D":RM$="T250O4L11C":X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
+9 k=ASC(k$)::ifK=31andr<8thenR=R+1:C=Cxor1:playRM$:elseifK=30andR>0thenR=R-1:C=Cxor1:playRM$
+10 ifK=27thenW=0:goto1:elseifK=28andC<7thenC=C+2:playCM$:goto8:elseifK=29andC>1thenC=C-2:playCM$:goto8:else8
