@@ -53,7 +53,7 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/?code=-M14Pt3p4mWDhXT8BbV3
+- https://msxpen.com/codes/-M1nwcpKdHJY9BY5Elew
 
 # Source Description
 
@@ -79,35 +79,36 @@ MSXPen link:
 - T: temporary value of Y
 - vpokeY... swaps values
 - W=2: user swaps symbols, W=1 swap operation doens't obtain a match-3, W=0: no operation
-- PLAY"L15"+CHR$(69+W): play a dynamic sound based on the number of moves
+- PLAY"T120O4L15"+CHR$(69+W): play a dynamic sound based on the number of moves
 
 ```
-3 locate21,0:?"PTS "P" ":locate1,0:?"HIGH "E" ":H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
+3 forI=0to3:locate5+I*5,22:?S(I);:vpoke6854+5*(I),I+1:nextI:H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
 ```
-- P: contains player points
+- forI=0to3:... prints statistics
 - G: contains video memory pointer to actual row procesed
 - H=0: change flag of puzzle content
-- FORI=... initialize first row with random symbols
+- FORI=0TO4:... initialize first row with random symbols
 
 ```
-4 forJ=4TO1step-1:A=G+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
+4 locate1,0:?"HIGH "E" "tab(20)"PTS "P" ":forJ=4TO1step-1:A=G+J*64:ifvpeek(A)=32thenvpokeA,vpeek(A-64):vpokeA-64,32:H=1
 ```
+- P: contains player points
 - Scroll values for a row to the next one if this is empty (ASCII 32)
 - A: contains video memory pointer to actual char procesed
 
 ```
-5 nextJ,I:ifH=1then3else:U=64:V=2:forK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0
+5 nextJ,I:ifH=1then3else:U=64:V=2:::forK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0 
 ```
 - U=64,V=2: U,V contains offset values for next row and next column
 - if change flag is setted repeat previous step
 - else start match-3 check loop
 
 ```
-6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:next:PLAY"T120O4L15A"+CHR$(65-H+N)
+6 N=N+1:ifT<32andT=vpeek(A+N*U)then6:elseifN>2thenforM=0toN-1:vpokeA+M*U,32:S(T-1)=S(T-1)+1:next:playM1$+CHR$(65-H+N)
 ```
 - checks if there are at least 3 symbols that matches, this is peformed in horizontal and vertical direction, using variables U,V as offsets for next row/column
+- playM1$+CHR$(65+H+N): play a dynamic sound based on the number of matches done
 
-- PLAY"L15A"+CHR$(65+H+N): play a dynamic sound based on the number of matches done
 ```
 7 H=H-(N>2):nextI,J:swapU,V:nextK:ifH>0thenP=P+H:E=E-(P>E)*H:W=0:goto3:elseifW>0then2:elseW=2
 ```
@@ -120,10 +121,9 @@ MSXPen link:
 - reset value of W=2
 
 ```
-8 CM$="T250O4L11D":RM$="T250O4L11C":X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
+8 MC$="T250O4L11D":X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
 ```
-- CM$: contains play string for coloumn change
-- RM$:contains play string for row change
+- MC$: contains play string for coloumn change
 - X contains cursor video memory pointer
 - K$=INKEY$:IFK$=""then7 read keyboard input
 - vpokeX,254: show cursor
@@ -131,14 +131,15 @@ MSXPen link:
 - pokeX,32: hide cursor
 
 ```
-9 k=ASC(k$)::ifK=31andr<8thenR=R+1:C=Cxor1:playRM$:elseifK=30andR>0thenR=R-1:C=Cxor1:playRM$
+9 MR$="T250O4L11C":k=ASC(k$)::ifK=31andr<8thenR=R+1:C=Cxor1:playMR$:elseifK=30andR>0thenR=R-1:C=Cxor1:playMR$
 ```
+- MR$:contains play string for row change
 - K=31 in case of down direction: cursor is moved to next row: R=R+1
 - K=30 in case of up direction: cursor is moved to previous row: R=R-1
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
-10 ifK=27thenW=0:goto1:elseifK=28andC<7thenC=C+2:playCM$:goto8:elseifK=29andC>1thenC=C-2:playCM$:goto8:else8
+10 ifK=27thenW=0:goto1:elseifK=28andC<7thenC=C+2:playMC$:goto8:elseifK=29andC>1thenC=C-2:playMC$:goto8:else8
 ```
 - K=27 in case of ESC key game is restarted
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2
