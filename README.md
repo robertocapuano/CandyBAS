@@ -54,7 +54,7 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/codes/-M1nwcpKdHJY9BY5Elew
+- https://msxpen.com/codes/-M1ocXG6oox6RBU1jg2i
 
 # Source Description
 
@@ -83,7 +83,7 @@ MSXPen link:
 - PLAY"T120O4L15"+CHR$(69+W): play a dynamic sound based on the number of moves
 
 ```
-3 forI=0to3:locate5+I*5,22:?S(I);:vpoke6854+5*(I),I+1:nextI:H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
+3 forI=0to3:locate6+I*5,22:?S(I);:vpoke6855+5*(I),I+1:nextI:H=0:FORI=0TO4:G=B+I*2:ifvpeek(G)=32thenvpokeG,RND(1)*4+1
 ```
 - forI=0to3:... prints statistics
 - G: contains video memory pointer to actual row procesed
@@ -98,7 +98,7 @@ MSXPen link:
 - A: contains video memory pointer to actual char procesed
 
 ```
-5 nextJ,I:ifH=1then3else:U=64:V=2:::forK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0 
+5 nextJ,I:ifH=1then3else:M1$="T120O4L15A":U=64:V=2:forK=0to1:forJ=0TO4:forI=0TO2:A=B+J*V+I*U:T=vpeek(A):N=0 
 ```
 - U=64,V=2: U,V contains offset values for next row and next column
 - if change flag is setted repeat previous step
