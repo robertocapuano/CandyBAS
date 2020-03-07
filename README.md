@@ -5,7 +5,8 @@ PUR120 is a enhanced version with:
 - Start Screen
 - Sounds
 - High Score
-- Restart Button
+- Restart Button (ESC)
+- Statistics 
 
 ![screenshot](screenshot.png)
 
