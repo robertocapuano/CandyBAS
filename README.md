@@ -54,7 +54,7 @@ WebMSX Launch URL:
 - https://webmsx.org?MACHINE=MSX2P&DISK=https://raw.githubusercontent.com/robertocapuano/CandyBAS/PUR120/candy.dsk&BASIC_RUN=candy.bas
 
 MSXPen link:
-- https://msxpen.com/codes/-M1ocXG6oox6RBU1jg2i
+- https://msxpen.com/codes/-M1tl2_cHDuasN2gmIbj
 
 # Source Description
 
@@ -140,7 +140,7 @@ MSXPen link:
 - C=Cxor1: produces alternate position of the cursor like a chessboard
 
 ```
-10 ifK=27thenW=0:goto1:elseifK=28andC<7thenC=C+2:playMC$:goto8:elseifK=29andC>1thenC=C-2:playMC$:goto8:else8
+10 ifK=27theneraseS:W=0:goto1:elseifK=28andC<7thenC=C+2:playMC$:goto8:elseifK=29andC>1thenC=C-2:playMC$:goto8:else8
 ```
 - K=27 in case of ESC key game is restarted
 - K=28 in case of left direction: cursor is moved to previous column: C=C-2

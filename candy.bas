@@ -7,4 +7,4 @@
 7 H=H-(N>2):nextI,J:swapU,V:nextK:ifH>0thenP=P+H:E=E-(P>E)*H:W=0:goto3:elseifW>0then2:elseW=2
 8 MC$="T250O4L11D":X=B+C+R*32:vpokeX,254:K$=INKEY$:IFK$=""then8:elsevpokeX,32:ifK$=" "andC<9then2
 9 MR$="T250O4L11C":k=ASC(k$)::ifK=31andr<8thenR=R+1:C=Cxor1:playMR$:elseifK=30andR>0thenR=R-1:C=Cxor1:playMR$
-10 ifK=27thenW=0:goto1:elseifK=28andC<7thenC=C+2:playMC$:goto8:elseifK=29andC>1thenC=C-2:playMC$:goto8:else8
+10 ifK=27theneraseS:W=0:goto1:elseifK=28andC<7thenC=C+2:playMC$:goto8:elseifK=29andC>1thenC=C-2:playMC$:goto8:else8
